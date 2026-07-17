@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Build metadata (main.js itself is committed for distribution)
+*.tsbuildinfo
+
+# Editor / OS
+.DS_Store

@@ -1,0 +1,38 @@
+/* tsvsheet — grid rendering for the ```sheet code block and the .tsvt view. */
+
+.tsvsheet-grid {
+	border-collapse: collapse;
+	width: 100%;
+	font-variant-numeric: tabular-nums;
+}
+
+.tsvsheet-grid td {
+	border: 1px solid var(--background-modifier-border);
+	padding: var(--size-2-1) var(--size-2-2);
+	text-align: left;
+	vertical-align: top;
+	white-space: pre-wrap;
+}
+
+.tsvsheet-grid td[contenteditable="true"]:focus {
+	outline: 2px solid var(--interactive-accent);
+	outline-offset: -2px;
+}
+
+.tsvsheet-view {
+	overflow: auto;
+	padding: var(--size-4-4);
+}
+
+.tsvsheet-error {
+	color: var(--text-error);
+	font-family: var(--font-monospace);
+	white-space: pre-wrap;
+	padding: var(--size-4-2);
+}
+
+.tsvsheet-diagnostics {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	margin-top: var(--size-4-2);
+}
