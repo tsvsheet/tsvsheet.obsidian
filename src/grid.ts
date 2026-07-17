@@ -3,7 +3,7 @@
  * dependency, so they are trivially testable and reused by both frontends
  * (the ```sheet code-block processor and the .tsvt file view).
  */
-import type { Grid } from "@uplang/tsvsheet";
+import type { Grid } from "@tsvsheet/tsvsheet";
 
 /**
  * Serialize a 2-D grid back to a `.tsvt` source string: TAB between columns,

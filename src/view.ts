@@ -9,7 +9,7 @@
  * the recomputed grid.
  */
 import { Notice, TextFileView, type WorkspaceLeaf } from "obsidian";
-import type { View } from "@uplang/tsvsheet";
+import type { View } from "@tsvsheet/tsvsheet";
 import type TsvsheetPlugin from "./main";
 import { buildTable, toTsv } from "./grid";
 import { errorMessage } from "./util";

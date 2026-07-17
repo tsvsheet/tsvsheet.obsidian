@@ -16,10 +16,10 @@
 		"tsv",
 		"wasm"
 	],
-	"author": "uplang",
+	"author": "tsvsheet",
 	"license": "MIT",
 	"dependencies": {
-		"@uplang/tsvsheet": "file:../tsvsheet.js"
+		"@tsvsheet/tsvsheet": "file:../tsvsheet.js"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.18.0",

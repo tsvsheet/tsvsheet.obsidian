@@ -12,7 +12,7 @@
  * vault), so nothing depends on `import.meta.url` resolving after bundling.
  */
 import { Notice, Plugin, normalizePath } from "obsidian";
-import type { Engine, View } from "@uplang/tsvsheet";
+import type { Engine, View } from "@tsvsheet/tsvsheet";
 import { loadEngine } from "./engine";
 import { buildTable } from "./grid";
 import { TSVT_VIEW_TYPE, TsvtView } from "./view";

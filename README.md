@@ -1,1 +1,1 @@
-[docs](https://uplang.github.io/docs.tsvsheet.obsidian/)
+[docs](https://tsvsheet.github.io/docs.tsvsheet.obsidian/)

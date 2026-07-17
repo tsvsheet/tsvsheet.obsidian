@@ -2,7 +2,7 @@
  * Instantiate the embedded tsvsheet WebAssembly engine inside a bundled
  * Obsidian plugin.
  *
- * The upstream `@uplang/tsvsheet` package resolves its wasm + `wasm_exec.js`
+ * The upstream `@tsvsheet/tsvsheet` package resolves its wasm + `wasm_exec.js`
  * assets relative to `import.meta.url`, which does not point at the plugin
  * directory once the module is bundled into `main.js`. So we do not call its
  * `load()` / `loadFrom()`; instead we replicate the (tiny) instantiation dance
@@ -10,7 +10,7 @@
  * plugin's own directory, and reuse the package's exported {@link Engine}
  * facade for the typed API surface.
  */
-import { Engine } from "@uplang/tsvsheet";
+import { Engine } from "@tsvsheet/tsvsheet";
 
 /** The stateless function table the Go program publishes on `globalThis`. */
 type TsvsheetApi = Record<string, (...args: unknown[]) => string>;
