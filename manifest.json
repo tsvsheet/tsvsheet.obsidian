@@ -5,6 +5,6 @@
 	"minAppVersion": "1.5.0",
 	"description": "A spreadsheet for plain text: renders live ```sheet code blocks and opens .tsvt files as an editable computed grid, powered by the embedded tsvsheet WebAssembly engine.",
 	"author": "tsvsheet",
-	"authorUrl": "https://uplang.org",
+	"authorUrl": "https://tsvsheet.com",
 	"isDesktopOnly": true
 }
