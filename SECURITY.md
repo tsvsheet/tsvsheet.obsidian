@@ -17,10 +17,10 @@ Report privately via [GitHub private vulnerability reporting](https://github.com
 
 | Measure | Cadence | Live results |
 | --- | --- | --- |
-| [CodeQL](.github/workflows/codeql.yml) static analysis (`security-extended` queries) | every push/PR + weekly | [workflow runs](https://github.com/tsvsheet/tsvsheet.obsidian/actions/workflows/codeql.yml) · [code scanning alerts](https://github.com/tsvsheet/tsvsheet.obsidian/security/code-scanning) |
+| CodeQL static analysis — GitHub-managed default setup, enforced organization-wide over the TypeScript sources and the Actions workflows themselves | every push + weekly | [code scanning alerts](https://github.com/tsvsheet/tsvsheet.obsidian/security/code-scanning) |
 | [`npm audit`](.github/workflows/verify.yml) dependency vulnerability scan | every push/PR + weekly | [workflow runs](https://github.com/tsvsheet/tsvsheet.obsidian/actions/workflows/verify.yml) |
 | [OSSF Scorecard](.github/workflows/scorecard.yml) supply-chain posture | every push + weekly | [public scorecard](https://scorecard.dev/viewer/?uri=github.com/tsvsheet/tsvsheet.obsidian) · [workflow runs](https://github.com/tsvsheet/tsvsheet.obsidian/actions/workflows/scorecard.yml) |
-| [Dependabot](.github/dependabot.yml) alerts + version updates (npm, GitHub Actions) | continuous + weekly | [dependency updates](https://github.com/tsvsheet/tsvsheet.obsidian/network/updates) · [alerts](https://github.com/tsvsheet/tsvsheet.obsidian/security/dependabot) (maintainer view) |
+| [Dependabot](.github/dependabot.yml) vulnerability alerts (all ecosystems) + weekly GitHub Actions version updates — npm version updates are impossible for a path dependency, so npm currency is held by the audit gate above | continuous + weekly | [dependency updates](https://github.com/tsvsheet/tsvsheet.obsidian/network/updates) · [alerts](https://github.com/tsvsheet/tsvsheet.obsidian/security/dependabot) (maintainer view) |
 | Secret scanning with push protection | continuous | [alerts](https://github.com/tsvsheet/tsvsheet.obsidian/security/secret-scanning) (maintainer view) |
 
 ## Repository constraints

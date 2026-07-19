@@ -1,10 +1,10 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
+  # npm has no updates entry: @tsvsheet/tsvsheet is a path dependency
+  # (file:../tsvsheet.js, a sibling checkout) that Dependabot's updater cannot
+  # retrieve, so npm version-update jobs would always fail. npm coverage comes
+  # from Dependabot alerts (dependency-graph based) plus the strict weekly
+  # `npm audit` gate in the verify workflow.
   - package-ecosystem: github-actions
     directory: /
     schedule:

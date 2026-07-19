@@ -10,13 +10,23 @@ import { buildTable } from "../src/grid.ts";
 const doc = () => new Window().document as unknown as Document;
 
 test("buildTable renders every row and column with literal text", () => {
-	const table = buildTable(doc(), [["a", "b"], ["1", "=A2+1"]], false);
+	const table = buildTable(
+		doc(),
+		[
+			["a", "b"],
+			["1", "=A2+1"],
+		],
+		false,
+	);
 	assert.equal(table.className, "tsvsheet-grid");
 	const rows = [...table.querySelectorAll("tr")];
 	assert.equal(rows.length, 2);
 	assert.deepEqual(
 		rows.map((tr) => [...tr.children].map((td) => td.textContent)),
-		[["a", "b"], ["1", "=A2+1"]],
+		[
+			["a", "b"],
+			["1", "=A2+1"],
+		],
 	);
 });
 
@@ -29,7 +39,14 @@ test("buildTable renders markup-like and error values as text, never HTML", () =
 });
 
 test("buildTable editable cells carry contenteditable and their coordinates", () => {
-	const table = buildTable(doc(), [["a", "b"], ["c", "d"]], true);
+	const table = buildTable(
+		doc(),
+		[
+			["a", "b"],
+			["c", "d"],
+		],
+		true,
+	);
 	const cells = [...table.querySelectorAll("td")] as HTMLTableCellElement[];
 	assert.equal(cells.length, 4);
 	for (const cell of cells) {
@@ -37,7 +54,12 @@ test("buildTable editable cells carry contenteditable and their coordinates", ()
 	}
 	assert.deepEqual(
 		cells.map((cell) => [cell.dataset.row, cell.dataset.col]),
-		[["0", "0"], ["0", "1"], ["1", "0"], ["1", "1"]],
+		[
+			["0", "0"],
+			["0", "1"],
+			["1", "0"],
+			["1", "1"],
+		],
 	);
 });
 

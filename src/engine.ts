@@ -42,7 +42,9 @@ type EngineConstructor = new (api: TsvsheetApi) => Engine;
  * never user input.
  */
 function defineGo(source: string): GoConstructor {
-	const factory = new Function(`${source}\nreturn globalThis.Go;`) as () => unknown;
+	const factory = new Function(
+		`${source}\nreturn globalThis.Go;`,
+	) as () => unknown;
 	const Go = factory();
 	if (typeof Go !== "function") {
 		throw new Error("wasm_exec.js did not define Go");

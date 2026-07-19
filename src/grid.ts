@@ -14,7 +14,11 @@ import type { Grid } from "@tsvsheet/tsvsheet";
  * each cell becomes `contenteditable` and carries its zero-based coordinates
  * in `data-row` / `data-col` for the edit handler to read back.
  */
-export function buildTable(doc: Document, grid: Grid, editable: boolean): HTMLTableElement {
+export function buildTable(
+	doc: Document,
+	grid: Grid,
+	editable: boolean,
+): HTMLTableElement {
 	const table = doc.createElement("table");
 	table.className = "tsvsheet-grid";
 	for (const [rowIndex, row] of grid.entries()) {

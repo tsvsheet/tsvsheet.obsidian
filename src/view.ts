@@ -12,10 +12,11 @@
  * source text and persists the engine's canonical `View.text` — never a grid
  * re-serialization, which would drop comment lines and the trailing newline.
  */
-import { Notice, TextFileView, setIcon, type WorkspaceLeaf } from "obsidian";
+
 import type { View } from "@tsvsheet/tsvsheet";
-import type TsvsheetPlugin from "./main";
+import { Notice, TextFileView, type WorkspaceLeaf, setIcon } from "obsidian";
 import { buildTable } from "./grid";
+import type TsvsheetPlugin from "./main";
 import { errorMessage } from "./util";
 
 export const TSVT_VIEW_TYPE = "tsvsheet-view";
@@ -38,9 +39,13 @@ export class TsvtView extends TextFileView {
 		super(leaf);
 		this.plugin = plugin;
 		this.contentEl.addClass("tsvsheet-view");
-		this.toggleEl = this.addAction(TOGGLE.preview.icon, TOGGLE.preview.title, () => {
-			this.setMode(this.mode === "preview" ? "edit" : "preview");
-		});
+		this.toggleEl = this.addAction(
+			TOGGLE.preview.icon,
+			TOGGLE.preview.title,
+			() => {
+				this.setMode(this.mode === "preview" ? "edit" : "preview");
+			},
+		);
 		this.registerDomEvent(this.contentEl, "focusout", (event) => {
 			void this.onCellEdit(event);
 		});

@@ -11,12 +11,13 @@
  * runtime shim are read from the plugin's own directory at runtime (not the
  * vault), so nothing depends on `import.meta.url` resolving after bundling.
  */
-import { Notice, Plugin, normalizePath } from "obsidian";
+
 import type { Engine, View } from "@tsvsheet/tsvsheet";
+import { Notice, Plugin, normalizePath } from "obsidian";
 import { loadEngine } from "./engine";
 import { buildTable } from "./grid";
-import { TSVT_VIEW_TYPE, TsvtView } from "./view";
 import { errorMessage } from "./util";
+import { TSVT_VIEW_TYPE, TsvtView } from "./view";
 
 export default class TsvsheetPlugin extends Plugin {
 	private enginePromise: Promise<Engine> | undefined;
@@ -50,13 +51,18 @@ export default class TsvsheetPlugin extends Plugin {
 			throw new Error("plugin directory is unknown");
 		}
 		const adapter = this.app.vault.adapter;
-		const wasm = await adapter.readBinary(normalizePath(`${dir}/tsvsheet.wasm`));
+		const wasm = await adapter.readBinary(
+			normalizePath(`${dir}/tsvsheet.wasm`),
+		);
 		const wasmExec = await adapter.read(normalizePath(`${dir}/wasm_exec.js`));
 		return loadEngine(wasm, wasmExec);
 	}
 
 	/** Render one ```sheet block as a read-only computed grid. */
-	private async renderSheetBlock(source: string, el: HTMLElement): Promise<void> {
+	private async renderSheetBlock(
+		source: string,
+		el: HTMLElement,
+	): Promise<void> {
 		let view: View;
 		try {
 			const engine = await this.getEngine();
@@ -80,6 +86,8 @@ function renderDiagnostics(el: HTMLElement, view: View): void {
 	const list = el.createEl("ul", { cls: "tsvsheet-diagnostics" });
 	for (const diagnostic of view.diagnostics) {
 		const prefix = diagnostic.fatal ? "error" : "warning";
-		list.createEl("li", { text: `${diagnostic.cell}: ${prefix}: ${diagnostic.message}` });
+		list.createEl("li", {
+			text: `${diagnostic.cell}: ${prefix}: ${diagnostic.message}`,
+		});
 	}
 }
