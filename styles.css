@@ -19,6 +19,12 @@
 	outline-offset: -2px;
 }
 
+/* Edit mode shows cell source — formulas — in the editor's mono face. */
+.tsvsheet-grid-source td {
+	font-family: var(--font-monospace);
+	font-size: var(--font-smaller);
+}
+
 .tsvsheet-view {
 	overflow: auto;
 	padding: var(--size-4-4);

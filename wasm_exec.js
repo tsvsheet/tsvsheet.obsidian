@@ -1,3 +1,4 @@
+// @generated — Go runtime glue copied verbatim from GOROOT/lib/wasm/wasm_exec.js; regenerate with make wasm, never edit.
 // Copyright 2018 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.

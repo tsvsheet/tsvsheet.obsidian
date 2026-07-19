@@ -1,17 +1,11 @@
 /**
- * Pure grid <-> DOM / text helpers. These have no Obsidian or engine
- * dependency, so they are trivially testable and reused by both frontends
- * (the ```sheet code-block processor and the .tsvt file view).
+ * Pure grid -> DOM helpers. These have no Obsidian or engine dependency, so
+ * they are trivially testable and reused by both frontends (the ```sheet
+ * code-block processor and the .tsvt file view). Serialization back to text
+ * is deliberately absent: the engine's `View.text` is the one sanctioned
+ * source serialization (rebuilding from a grid drops comment lines).
  */
 import type { Grid } from "@tsvsheet/tsvsheet";
-
-/**
- * Serialize a 2-D grid back to a `.tsvt` source string: TAB between columns,
- * newline between rows. Mirrors the engine's own `toTsv` so a round-trip
- * through `setCell` preserves the on-disk shape.
- */
-export const toTsv = (grid: Grid): string =>
-	grid.map((row) => row.join("\t")).join("\n");
 
 /**
  * Build a `<table>` from a computed grid. Cell text is assigned via
