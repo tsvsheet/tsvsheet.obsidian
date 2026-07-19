@@ -1,0 +1,45 @@
+# The plugin's own gate: typecheck + eslint + node:test + production build,
+# then a strict dependency audit (all severities, dev dependencies included).
+# The weekly run re-audits the unchanged tree so advisories published between
+# pushes still surface. @tsvsheet/tsvsheet is consumed as a sibling checkout
+# (file:../tsvsheet.js), mirroring the local layout.
+name: verify
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "29 6 * * 1"
+  workflow_dispatch:
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          path: tsvsheet.obsidian
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          repository: tsvsheet/tsvsheet.js
+          path: tsvsheet.js
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          check-latest: true
+      - working-directory: tsvsheet.obsidian
+        run: npm ci
+      - working-directory: tsvsheet.obsidian
+        run: npm test
+      - working-directory: tsvsheet.obsidian
+        run: npm run build
+      - working-directory: tsvsheet.obsidian
+        run: npm audit
