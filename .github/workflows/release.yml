@@ -69,7 +69,7 @@ jobs:
           cache: true
       # goreleaser fails a `dockers:` push without a registry login; for a repo
       # that only builds binaries this is a harmless no-op.
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         if: steps.cfg.outputs.present == 'true'
         with:
           registry: ghcr.io
