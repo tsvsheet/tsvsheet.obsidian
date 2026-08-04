@@ -19,6 +19,38 @@
 	outline-offset: -2px;
 }
 
+/* A1 headers, edit mode only: the column letters and row numbers a formula
+   addresses. Muted and sticky, so they stay legible while scrolling a long
+   sheet without competing with the data for attention. */
+.tsvsheet-grid th {
+	border: 1px solid var(--background-modifier-border);
+	padding: var(--size-2-1) var(--size-2-2);
+	background: var(--background-secondary);
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-normal);
+	text-align: center;
+	position: sticky;
+	user-select: none;
+}
+
+.tsvsheet-head th {
+	top: 0;
+	z-index: 1;
+}
+
+.tsvsheet-gutter {
+	left: 0;
+	text-align: right;
+}
+
+/* The corner belongs to both axes, so it outranks each of them. */
+.tsvsheet-corner {
+	top: 0;
+	left: 0;
+	z-index: 2;
+}
+
 /* Edit mode shows cell source — formulas — in the editor's mono face. */
 .tsvsheet-grid-source td {
 	font-family: var(--font-monospace);

@@ -75,3 +75,63 @@ test("buildTable of an empty grid is an empty table", () => {
 	const table = buildTable(doc(), [], false);
 	assert.equal(table.querySelectorAll("tr").length, 0);
 });
+
+test("buildTable: editing shows A1 headers — the addresses formulas use", () => {
+	const table = buildTable(
+		doc(),
+		[
+			["a", "b", "c"],
+			["1", "2", "3"],
+		],
+		true,
+	);
+	const rows = [...table.querySelectorAll("tr")];
+	assert.equal(rows.length, 3, "a header row precedes the grid");
+	assert.deepEqual(
+		[...(rows[0]?.children ?? [])].map((th) => th.textContent),
+		["", "A", "B", "C"],
+		"an empty corner, then the column letters",
+	);
+	assert.deepEqual(
+		rows.slice(1).map((tr) => tr.children[0]?.textContent),
+		["1", "2"],
+		"row numbers are 1-based, in the gutter",
+	);
+	assert.deepEqual(
+		[...(rows[1]?.children ?? [])].slice(1).map((td) => td.textContent),
+		["a", "b", "c"],
+		"the data is unshifted by the gutter",
+	);
+});
+
+test("buildTable: reading shows no spreadsheet chrome", () => {
+	const table = buildTable(doc(), [["a", "b"]], false);
+	assert.equal(
+		table.querySelectorAll("th").length,
+		0,
+		"a rendered ```sheet fence is a table in a document, not a spreadsheet",
+	);
+	assert.equal(table.querySelectorAll("tr").length, 1);
+});
+
+test("buildTable: a ragged grid still gets a label per column", () => {
+	const table = buildTable(doc(), [["a"], ["b", "c", "d"]], true);
+	const header = [...(table.querySelectorAll("tr")[0]?.children ?? [])];
+	assert.deepEqual(
+		header.map((th) => th.textContent),
+		["", "A", "B", "C"],
+		"the widest row decides how many letters are needed",
+	);
+});
+
+test("buildTable: headers carry the scope a screen reader needs", () => {
+	const table = buildTable(doc(), [["a"]], true);
+	const rows = [...table.querySelectorAll("tr")];
+	assert.equal(rows[0]?.children[1]?.getAttribute("scope"), "col");
+	assert.equal(rows[1]?.children[0]?.getAttribute("scope"), "row");
+	assert.equal(
+		rows[0]?.children[0]?.getAttribute("aria-label"),
+		"row and column labels",
+		"the corner is named, not announced as a bare cell",
+	);
+});

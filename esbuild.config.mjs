@@ -13,6 +13,14 @@ const engineEntry = path.join(
 	"node_modules/@tsvsheet/tsvsheet/src/tsvsheet/engine.js",
 );
 
+// The A1 labels, by their own subpath. It needs an alias of its own because
+// the bare-specifier alias above prefix-matches, so `@tsvsheet/tsvsheet/a1`
+// would otherwise resolve against `engine.js` as if it were a directory.
+const a1Entry = path.join(
+	import.meta.dirname,
+	"node_modules/@tsvsheet/tsvsheet/src/tsvsheet/a1.js",
+);
+
 // The @generated marker keeps bundle output out of the fleet lint gate
 // (nicerobot/tools.build ci/typescript excludes files carrying it).
 const banner = `/*
@@ -45,6 +53,7 @@ const context = await esbuild.context({
 		...builtins.map((name) => `node:${name}`),
 	],
 	alias: {
+		"@tsvsheet/tsvsheet/a1": a1Entry,
 		"@tsvsheet/tsvsheet": engineEntry,
 	},
 	format: "cjs",
