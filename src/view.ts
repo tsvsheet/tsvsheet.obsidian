@@ -43,7 +43,7 @@ export class TsvtView extends TextFileView {
 			TOGGLE.preview.icon,
 			TOGGLE.preview.title,
 			() => {
-				this.setMode(this.mode === "preview" ? "edit" : "preview");
+				this.toggleMode();
 			},
 		);
 		this.registerDomEvent(this.contentEl, "focusout", (event) => {
@@ -79,6 +79,20 @@ export class TsvtView extends TextFileView {
 		this.data = "";
 		this.view = undefined;
 		this.contentEl.empty();
+	}
+
+	/**
+	 * Flip between the computed preview and the formula-editing grid.
+	 *
+	 * Public because the header action is not the only way to ask: Obsidian's
+	 * own Cmd-E is `markdown:toggle-preview`, which the app gates to a
+	 * MarkdownView, so it never reaches a `.tsvt`. Without a command a user
+	 * cannot bind a key to this at all — the plugin registers one over this
+	 * method so the toggle appears in the palette and takes a hotkey like any
+	 * other command.
+	 */
+	toggleMode(): void {
+		this.setMode(this.mode === "preview" ? "edit" : "preview");
 	}
 
 	/** Switch between the computed preview and the formula-editing grid. */

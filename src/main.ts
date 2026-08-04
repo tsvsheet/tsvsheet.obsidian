@@ -28,6 +28,26 @@ export default class TsvsheetPlugin extends Plugin {
 		);
 		this.registerView(TSVT_VIEW_TYPE, (leaf) => new TsvtView(leaf, this));
 		this.registerExtensions(["tsvt"], TSVT_VIEW_TYPE);
+		// A `.tsvt` opens in a custom view, and Obsidian's built-in
+		// reading/editing toggle (Cmd-E) is `markdown:toggle-preview`, gated to
+		// a MarkdownView — so it does nothing here, and until this command
+		// existed there was nothing a key could be bound to. Registering it
+		// puts the toggle in the palette and makes it bindable, including to
+		// Cmd-E itself, which is free while a .tsvt is focused.
+		this.addCommand({
+			id: "toggle-preview",
+			name: "Toggle computed values and formulas",
+			checkCallback: (checking) => {
+				const view = this.app.workspace.getActiveViewOfType(TsvtView);
+				if (view === null) {
+					return false;
+				}
+				if (!checking) {
+					view.toggleMode();
+				}
+				return true;
+			},
+		});
 
 		// Kick off engine instantiation eagerly so the first render is fast and
 		// a load failure surfaces immediately; consumers await the same promise.
