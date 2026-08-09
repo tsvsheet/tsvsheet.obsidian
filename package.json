@@ -1,6 +1,6 @@
 {
 	"name": "tsvsheet-obsidian",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"description": "Obsidian plugin for tsvsheet — live ```sheet code blocks and an editable .tsvt view over the embedded WebAssembly engine.",
 	"main": "main.js",
 	"scripts": {

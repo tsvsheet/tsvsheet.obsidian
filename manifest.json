@@ -1,7 +1,7 @@
 {
 	"id": "tsvsheet",
 	"name": "tsvsheet",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"minAppVersion": "1.5.0",
 	"description": "A spreadsheet in plain text: renders live ```sheet code blocks and opens .tsvt files as an editable computed grid, powered by the embedded tsvsheet WebAssembly engine.",
 	"author": "tsvsheet",
