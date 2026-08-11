@@ -34,7 +34,7 @@ on:
       - ".standards.yaml"
       - ".github/workflows/typescript.yml"
   schedule:
-    - cron: "25 10 * * 5"
+    - cron: "50 10 26 * *"
   workflow_dispatch:
 concurrency:
   group: typescript-${{ github.ref }}
